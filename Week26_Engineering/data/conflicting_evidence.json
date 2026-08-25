@@ -1,0 +1,20 @@
+[
+  {
+    "id": "E1",
+    "question": "Who discovered America?",
+    "context": [
+      "Source A: Christopher Columbus discovered America in 1492.",
+      "Source B: Norse explorer Leif Erikson reached America around 1000 AD."
+    ],
+    "expected_behavior": "Model should expose conflict or ask for clarification."
+  },
+  {
+    "id": "E2",
+    "question": "What is the boiling point of water?",
+    "context": [
+      "Source A: Water boils at 100°C at sea level.",
+      "Source B: Water boils at 95°C according to experiment in high altitude."
+    ],
+    "expected_behavior": "Model should mention altitude difference or uncertainty."
+  }
+]

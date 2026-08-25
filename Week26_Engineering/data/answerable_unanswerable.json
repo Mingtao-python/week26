@@ -1,0 +1,26 @@
+[
+  {
+    "id": "A1",
+    "question": "Who wrote 'Pride and Prejudice'?",
+    "context": "Jane Austen wrote 'Pride and Prejudice'.",
+    "answerable": true
+  },
+  {
+    "id": "A2",
+    "question": "What is the population of Mars?",
+    "context": "",
+    "answerable": false
+  },
+  {
+    "id": "A3",
+    "question": "When was the first iPhone released?",
+    "context": "The first iPhone was released in 2007.",
+    "answerable": true
+  },
+  {
+    "id": "A4",
+    "question": "What is the favorite color of the author of 'War and Peace'?",
+    "context": "No information available.",
+    "answerable": false
+  }
+]

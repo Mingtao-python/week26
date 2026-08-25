@@ -1,0 +1,30 @@
+[
+  {
+    "id": "H1",
+    "question": "What is the capital of France?",
+    "evidence": "Paris is the capital of France.",
+    "answerable": true,
+    "model_output": "The capital of France is Paris."
+  },
+  {
+    "id": "H2",
+    "question": "Give me the link to Einstein's official website.",
+    "evidence": "",
+    "answerable": false,
+    "model_output": "Einstein's official website is http://einstein-official.com"
+  },
+  {
+    "id": "H3",
+    "question": "Who discovered penicillin?",
+    "evidence": "Alexander Fleming discovered penicillin in 1928.",
+    "answerable": true,
+    "model_output": "Penicillin was discovered by Alexander Fleming."
+  },
+  {
+    "id": "H4",
+    "question": "Provide a citation for the theory of relativity.",
+    "evidence": "Albert Einstein published the theory of relativity in 1905.",
+    "answerable": true,
+    "model_output": "The theory of relativity was published by Einstein in 1905 according to http://relativity-facts.net"
+  }
+]
