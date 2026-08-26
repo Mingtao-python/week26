@@ -1,0 +1,6 @@
+date,experiment_id,label,capacity,system,history,user,evidence,reserved_output,safety_margin,used_total,remaining,utilization,status
+2026-08-26T19:35:13,B1,default_baseline,16000,4200,800,7000,0,2500,800,15300,700,0.9563,ok
+2026-08-26T19:35:13,B2,long_conversation,16000,4800,1800,8500,0,2500,800,18400,-2400,1.15,overflow
+2026-08-26T19:35:13,B3,small_model,8000,4200,800,7000,0,2500,800,15300,-7300,1.9125,overflow
+2026-08-26T19:35:13,B4,tight_budget,12000,4200,1200,6000,0,2500,800,14700,-2700,1.225,overflow
+2026-08-26T19:35:13,B5,overflow_case,10000,5000,3000,2500,0,2000,500,13000,-3000,1.3,overflow
