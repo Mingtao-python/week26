@@ -1,0 +1,30 @@
+[
+  {
+    "id": "C1",
+    "context_type": "short_relevant",
+    "context": ["Gravity is a force that attracts objects toward each other."],
+    "expected_behavior": "Model answers correctly using short context."
+  },
+  {
+    "id": "C2",
+    "context_type": "long_relevant",
+    "context": [
+      "Gravity is a fundamental force.",
+      "It acts between masses.",
+      "Newton described it mathematically.",
+      "Einstein redefined it as spacetime curvature."
+    ],
+    "expected_behavior": "Model answers correctly using long relevant context."
+  },
+  {
+    "id": "C3",
+    "context_type": "long_noisy",
+    "context": [
+      "Gravity is a force.",
+      "Bananas are yellow.",
+      "Cats sleep a lot.",
+      "The moon affects tides."
+    ],
+    "expected_behavior": "Model may ignore relevant info or mix unrelated facts."
+  }
+]

@@ -1,0 +1,28 @@
+[
+  {
+    "id": "X1",
+    "experiment": "Tokenization",
+    "input": "Hello world!",
+    "expected_tokens": ["Hello", "world", "!"]
+  },
+  {
+    "id": "X2",
+    "experiment": "Decoding",
+    "logits": [2.0, 1.0, 0.0],
+    "vocab": ["apple", "banana", "cat"],
+    "expected_output": "apple"
+  },
+  {
+    "id": "X3",
+    "experiment": "Context Length",
+    "contexts": ["short", "long relevant", "long noisy"],
+    "expected_behavior": "Compare accuracy and relevance."
+  },
+  {
+    "id": "X4",
+    "experiment": "Missing Evidence",
+    "question": "What is the capital of Atlantis?",
+    "context": "",
+    "expected_behavior": "Model should abstain or ask for clarification."
+  }
+]
