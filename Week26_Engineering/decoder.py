@@ -2,9 +2,14 @@ import math
 import random
 
 def softmax(logits):
-    """Compute softmax probabilities from logits."""
-    exps = [math.exp(x) for x in logits]
+    """Compute softmax probabilities from logits with numerical stability."""
+    if not logits:
+        return []
+    m = max(logits)
+    exps = [math.exp(x - m) for x in logits]
     total = sum(exps)
+    if total == 0:
+        return [1.0 / len(logits)] * len(logits)
     return [e / total for e in exps]
 
 def greedy_decode(logits, vocab):
@@ -15,6 +20,8 @@ def greedy_decode(logits, vocab):
 
 def temperature_sample(logits, vocab, temperature=1.0):
     """Sample a token using temperature-scaled probabilities."""
+    if temperature <= 0:
+        raise ValueError("temperature must be > 0")
     scaled = [x / temperature for x in logits]
     probs = softmax(scaled)
     r = random.random()
@@ -32,6 +39,10 @@ def demo():
     print("Greedy:", greedy_decode(logits, vocab))
     print("Temp=0.7:", temperature_sample(logits, vocab, 0.7))
     print("Temp=1.5:", temperature_sample(logits, vocab, 1.5))
+    
+    # Test numerical stability
+    large_logits = [1000, 999, 998]
+    print("Large logits softmax:", softmax(large_logits))
 
 if __name__ == "__main__":
     demo()

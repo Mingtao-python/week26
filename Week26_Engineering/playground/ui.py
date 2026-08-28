@@ -5,9 +5,10 @@ class PlaygroundUI:
         print("2. Context Window Inspector")
         print("3. Generation View (Toy Decoder)")
         print("4. Hallucination Classifier")
+        print("5. Run Experiment")
         print("0. Exit")
         return input("Choose an option: ")
-
+    
     def get_text(self, msg):
         print(msg)
         return input("> ")
@@ -35,14 +36,29 @@ class PlaygroundUI:
 
     def show_context(self, ctx):
         print("\nContext Analysis:")
-        for item in ctx:
-            print("-", item)
+        if isinstance(ctx, dict) and ctx.get("layered"):
+            # Display layered context with token budget info
+            print("\n--- Context Blocks ---")
+            print(f"System ({ctx.get('system', {}).get('tokens', 0)} tokens): {ctx.get('system', {}).get('text', '')[:50]}...")
+            print(f"History ({ctx.get('history', {}).get('tokens', 0)} tokens): {ctx.get('history', {}).get('text', '')[:50]}...")
+            print(f"User ({ctx.get('user', {}).get('tokens', 0)} tokens): {ctx.get('user', {}).get('text', '')[:50]}...")
+            evidence = ctx.get('evidence', {})
+            ev_items = evidence.get('items', [])
+            print(f"Evidence ({evidence.get('tokens', 0)} tokens): {len(ev_items)} items")
+            print(f"\nInput Total: {ctx.get('input_total', 0)} tokens")
+        else:
+            # Old format display
+            for item in ctx.get("items", []):
+                print("-", item)
+            print(f"Total tokens: {ctx.get('total_tokens', 0)}")
 
     def show_generation(self, result):
         print("\nGeneration Result:")
-        print("Selected token:", result["token"])
-        print("Probabilities:", result["probs"])
+        print(f"Selected token: {result['token']}")
+        print(f"Temperature: {result.get('temperature', 'N/A')}")
+        print(f"Method: {result.get('method', 'greedy')}")
+        print(f"Probabilities: {[f'{p:.3f}' for p in result['probs']]}")
 
     def show_failure(self, result):
         print("\nFailure Classification:")
-        print(result)
+        print(f"Result: {result}")

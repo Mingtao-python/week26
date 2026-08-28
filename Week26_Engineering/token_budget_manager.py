@@ -4,7 +4,20 @@ def token_budget(capacity, inputs, reserved_output, safety_margin):
     inputs: list of token counts [system, history, user, evidence]
     reserved_output: tokens reserved for model output
     safety_margin: extra buffer
+    
+    Returns: (remaining, utilization) or raises ValueError on invalid input
     """
+    # Input validation
+    if capacity <= 0:
+        raise ValueError("capacity must be > 0")
+    if reserved_output < 0:
+        raise ValueError("reserved_output must be >= 0")
+    if safety_margin < 0:
+        raise ValueError("safety_margin must be >= 0")
+    for inp in inputs:
+        if inp < 0:
+            raise ValueError("input token counts must be >= 0")
+    
     used = sum(inputs)
     total_required = used + reserved_output + safety_margin
 
