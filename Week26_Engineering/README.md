@@ -12,6 +12,9 @@ reports under `report/`.
 
 ## Quick start
 
+The second-review fixes are applied in the code and tests. Existing A–F reports and logs
+are historical results; rerun the runner for current labels.
+
 ```bash
 # from this directory (Week26_Engineering/)
 
@@ -83,6 +86,29 @@ Python 3.10+, no external dependencies. `pytest` is the only suggested dev depen
 ---
 
 ## Limitations
+
+Token counts are **estimated**, NOT provider/model tokenizer counts. The same word/punctuation
+estimator is used for every context layer. Settings control capacity, output reserve, safety,
+temperature, logging and context policy. System and user input are protected; priority trimming
+removes history first, then evidence in list order. Unresolved overflow blocks generation.
+
+Menu 5 loads a case by ID, builds layered context, applies the budget, selects a candidate,
+classifies the output and prints the experiment ID. JSONL records include settings, effective
+context, budget before/after trimming, probabilities, raw output, expected/actual behavior and
+failure label. With logging disabled the run still has an ID, but is not saved.
+
+The toy decoder selects supplied candidates from supplied logits; it does not compute logits
+from the prompt. Cases can provide `vocab` (including full answer candidates) and matching `logits`.
+Temperature 0 selects greedily; positive values sample. Replay mode evaluates a saved
+`model_output` and labels it as recorded output. Output candidates that exceed the estimated
+output reserve are rejected, not silently truncated. Default log paths are anchored to this folder.
+
+The classifier uses fixture facts (`expected_facts` / `contradicted_facts`, including `key=value`),
+optional exact `supported_answers` aliases, and conservative content-term coverage. Missing support
+is unsupported, not contradiction. Empty output is a failure. Refusal templates and clarification
+questions distinguish ABSTAIN and ASK; fabricated URLs and explicit conflicts distinguish
+FABRICATE and CONTRADICT. This rubric cannot understand arbitrary paraphrases, negation or
+relationships; add reviewed aliases/facts for each case and review unfamiliar output manually.
 
 This playground is an **engineering instrument**, not a chat UI. It cannot:
 

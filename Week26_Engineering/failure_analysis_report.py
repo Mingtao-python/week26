@@ -1,4 +1,9 @@
-def analyze_failure(prompt, context, output):
+try:
+    from .hallucination_test_runner import classify_failure
+except ImportError:
+    from hallucination_test_runner import classify_failure
+
+def analyze_failure(prompt, context, output, test_case=None):
     """
     Generate a structured failure analysis report.
     """
@@ -13,15 +18,22 @@ def analyze_failure(prompt, context, output):
         "next_experiment": None
     }
 
-    if "http" in output and "http" not in context:
+    case = {"evidence": context, **(test_case or {})}
+    label = classify_failure(case, output)
+    if label == "fabricated_reference":
         report["fabricated_refs"].append(output)
         report["likely_cause"] = "generation failure"
         report["next_experiment"] = "Add citation verification step"
 
-    if context and context not in output:
+    if label == "context_contradiction":
         report["contradictions"].append(output)
         report["likely_cause"] = "context conflict"
         report["next_experiment"] = "Reduce noisy context"
+
+    if label == "unsupported":
+        report["unsupported_claims"].append(output)
+        report["likely_cause"] = "insufficient evidence support"
+        report["next_experiment"] = "Add evidence or require abstention"
 
     if report["likely_cause"] is None:
         report["likely_cause"] = "unknown"

@@ -1,6 +1,8 @@
 {
     "temperature": 0.7,
     "max_output_tokens": 200,
+    "context_capacity": 16000,
+    "safety_margin": 800,
     "context_policy": "priority_trim",
     "log_experiments": true
 }

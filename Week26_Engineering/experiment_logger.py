@@ -1,18 +1,23 @@
 import json
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
+from pathlib import Path
 
 def log_experiment(data, filename="logs/experiments.jsonl"):
     """
     data: dict containing prompt, context, settings, output, token counts, failure label
     """
+    path = Path(filename)
+    if not path.is_absolute():
+        path = Path(__file__).resolve().parent / path
+    path.parent.mkdir(parents=True, exist_ok=True)
     record = {
+        **data,
         "id": str(uuid.uuid4()),
-        "timestamp": datetime.utcnow().isoformat(),
-        **data
+        "timestamp": datetime.now(timezone.utc).isoformat()
     }
-    with open(filename, "a", encoding="utf-8") as f:
-        f.write(json.dumps(record) + "\n")
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(record, ensure_ascii=False) + "\n")
     return record["id"]
 
 def demo():

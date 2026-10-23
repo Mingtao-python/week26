@@ -59,4 +59,4 @@ def test_expected_facts_match():
     output = "Penicillin was discovered by Alexander Fleming."
     result = classify_failure(case, output)
     # Should be acceptable since key facts are present
-    assert result in ["acceptable", "unsupported"]  # Depends on word overlap heuristic
+    assert result == "acceptable"

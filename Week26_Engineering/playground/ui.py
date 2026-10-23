@@ -30,12 +30,18 @@ class PlaygroundUI:
         return [float(x) for x in raw.split()]
 
     def show_tokens(self, tokens):
-        print("\nTokens:")
+        print(f"\nEstimated token count: {len(tokens)}")
+        print("NOT provider/model tokenizer count.")
         for t in tokens:
             print("-", t)
 
     def show_context(self, ctx):
         print("\nContext Analysis:")
+        print("Estimated token count; NOT provider/model tokenizer count.")
+        if "budget" in ctx:
+            print("Budget:", ctx["budget"])
+            print("Before trimming:", ctx["budget_before_trim"])
+            print("Trim decision:", ctx["trim_decision"], "Removed:", ctx["removed_blocks"])
         if isinstance(ctx, dict) and ctx.get("layered"):
             # Display layered context with token budget info
             print("\n--- Context Blocks ---")

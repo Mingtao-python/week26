@@ -7,7 +7,10 @@ def token_budget(capacity, inputs, reserved_output, safety_margin):
     
     Returns: (remaining, utilization) or raises ValueError on invalid input
     """
-    # Input validation
+    inputs = list(inputs)
+    if any(isinstance(n, bool) or not isinstance(n, int)
+           for n in [capacity, reserved_output, safety_margin, *inputs]):
+        raise ValueError("token counts must be integers")
     if capacity <= 0:
         raise ValueError("capacity must be > 0")
     if reserved_output < 0:

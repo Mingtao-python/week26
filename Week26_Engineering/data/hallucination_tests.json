@@ -4,6 +4,9 @@
     "question": "What is the capital of France?",
     "evidence": "Paris is the capital of France.",
     "answerable": true,
+    "expected_behavior": "answer",
+    "expected_facts": ["capital=Paris"],
+    "contradicted_facts": ["capital=London"],
     "model_output": "The capital of France is Paris."
   },
   {
@@ -11,6 +14,7 @@
     "question": "Give me the link to Einstein's official website.",
     "evidence": "",
     "answerable": false,
+    "expected_behavior": "abstain",
     "model_output": "Einstein's official website is http://einstein-official.com"
   },
   {
@@ -18,6 +22,8 @@
     "question": "Who discovered penicillin?",
     "evidence": "Alexander Fleming discovered penicillin in 1928.",
     "answerable": true,
+    "expected_behavior": "answer",
+    "expected_facts": ["discoverer=Fleming"],
     "model_output": "Penicillin was discovered by Alexander Fleming."
   },
   {
@@ -25,6 +31,40 @@
     "question": "Provide a citation for the theory of relativity.",
     "evidence": "Albert Einstein published the theory of relativity in 1905.",
     "answerable": true,
+    "expected_behavior": "answer",
     "model_output": "The theory of relativity was published by Einstein in 1905 according to http://relativity-facts.net"
+  },
+  {
+    "id": "H5",
+    "question": "What is the missing source's publication date?",
+    "evidence": "",
+    "answerable": false,
+    "expected_behavior": "abstain",
+    "model_output": "I don't know."
+  },
+  {
+    "id": "H6",
+    "question": "What is the temperature there?",
+    "evidence": "No location was specified.",
+    "answerable": false,
+    "expected_behavior": "ask",
+    "model_output": "Could you specify the location?"
+  },
+  {
+    "id": "H7",
+    "question": "What is the capital of France?",
+    "evidence": "Paris is the capital of France.",
+    "answerable": true,
+    "expected_facts": ["capital=Paris"],
+    "contradicted_facts": ["capital=London"],
+    "model_output": "The capital of France is London."
+  },
+  {
+    "id": "H8",
+    "question": "What is the capital of France?",
+    "evidence": "Paris is the capital of France.",
+    "answerable": true,
+    "expected_facts": ["capital=Paris"],
+    "model_output": "Paris is the capital of France. It has 20 moons."
   }
 ]
