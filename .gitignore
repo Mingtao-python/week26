@@ -41,3 +41,7 @@ Thumbs.db
 .env.local
 .env.*
 ```
+
+# Vscode
+.vscode/
+.json*
